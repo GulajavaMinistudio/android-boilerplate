@@ -1,18 +1,17 @@
 package uk.co.ribot.androidboilerplate.injection.module;
 
 import android.app.Application;
-
-import com.squareup.otto.Bus;
+import android.content.Context;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import uk.co.ribot.androidboilerplate.data.DataManager;
+import uk.co.ribot.androidboilerplate.data.remote.RibotsService;
+import uk.co.ribot.androidboilerplate.injection.ApplicationContext;
 
 /**
- * Provide application-level dependencies. Mainly singleton object that can be injected from
- * anywhere in the app.
+ * Provide application-level dependencies.
  */
 @Module
 public class ApplicationModule {
@@ -23,21 +22,20 @@ public class ApplicationModule {
     }
 
     @Provides
-    @Singleton
     Application provideApplication() {
         return mApplication;
     }
 
     @Provides
-    @Singleton
-    DataManager provideDataManager() {
-        return new DataManager(mApplication);
+    @ApplicationContext
+    Context provideContext() {
+        return mApplication;
     }
 
     @Provides
     @Singleton
-    Bus provideEventBus() {
-        return new Bus();
+    RibotsService provideRibotsService() {
+        return RibotsService.Creator.newRibotsService();
     }
 
 }

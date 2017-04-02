@@ -5,12 +5,13 @@ import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
-import retrofit.RxJavaCallAdapterFactory;
-import retrofit.http.GET;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
 import rx.Observable;
 import uk.co.ribot.androidboilerplate.data.model.Ribot;
+import uk.co.ribot.androidboilerplate.util.MyGsonTypeAdapterFactory;
 
 public interface RibotsService {
 
@@ -24,6 +25,7 @@ public interface RibotsService {
 
         public static RibotsService newRibotsService() {
             Gson gson = new GsonBuilder()
+                    .registerTypeAdapterFactory(MyGsonTypeAdapterFactory.create())
                     .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
                     .create();
             Retrofit retrofit = new Retrofit.Builder()

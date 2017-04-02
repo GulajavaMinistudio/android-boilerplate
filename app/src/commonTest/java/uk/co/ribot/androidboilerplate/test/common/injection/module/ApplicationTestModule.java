@@ -1,17 +1,17 @@
 package uk.co.ribot.androidboilerplate.test.common.injection.module;
 
 import android.app.Application;
-
-import com.squareup.otto.Bus;
+import android.content.Context;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import uk.co.ribot.androidboilerplate.data.DataManager;
-import uk.co.ribot.androidboilerplate.test.common.TestDataManager;
+import uk.co.ribot.androidboilerplate.data.remote.RibotsService;
+import uk.co.ribot.androidboilerplate.injection.ApplicationContext;
 
-import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.mock;
 
 /**
  * Provides application-level dependencies for an app running on a testing environment
@@ -19,30 +19,36 @@ import static org.mockito.Mockito.spy;
  */
 @Module
 public class ApplicationTestModule {
-    private final Application mApplication;
-    private boolean mMockableDataManager;
 
-    public ApplicationTestModule(Application application, boolean mockableDataManager) {
+    private final Application mApplication;
+
+    public ApplicationTestModule(Application application) {
         mApplication = application;
-        mMockableDataManager = mockableDataManager;
     }
 
     @Provides
-    @Singleton
     Application provideApplication() {
         return mApplication;
     }
 
     @Provides
+    @ApplicationContext
+    Context provideContext() {
+        return mApplication;
+    }
+
+    /************* MOCKS *************/
+
+    @Provides
     @Singleton
     DataManager provideDataManager() {
-        TestDataManager testDataManager = new TestDataManager(mApplication);
-        return mMockableDataManager ? spy(testDataManager) : testDataManager;
+        return mock(DataManager.class);
     }
 
     @Provides
     @Singleton
-    Bus provideEventBus() {
-        return new Bus();
+    RibotsService provideRibotsService() {
+        return mock(RibotsService.class);
     }
+
 }

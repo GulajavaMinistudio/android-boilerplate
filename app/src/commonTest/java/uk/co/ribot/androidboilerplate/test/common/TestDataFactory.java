@@ -19,34 +19,31 @@ public class TestDataFactory {
         return UUID.randomUUID().toString();
     }
 
-    public static Ribot makeRibot() {
-        return new Ribot(makeProfile());
+    public static Ribot makeRibot(String uniqueSuffix) {
+        return Ribot.create(makeProfile(uniqueSuffix));
     }
 
     public static List<Ribot> makeListRibots(int number) {
         List<Ribot> ribots = new ArrayList<>();
         for (int i = 0; i < number; i++) {
-            ribots.add(makeRibot());
+            ribots.add(makeRibot(String.valueOf(i)));
         }
         return ribots;
     }
 
-    public static Profile makeProfile() {
-        Profile profile = new Profile();
-        profile.email = randomUuid();
-        profile.name = makeName();
-        profile.dateOfBirth = new Date();
-        profile.hexColor = "#0066FF";
-        profile.avatar = "http://api.ribot.io/images/" + profile.email;
-        profile.bio = randomUuid();
-        return profile;
+    public static Profile makeProfile(String uniqueSuffix) {
+        return Profile.builder()
+                .setName(makeName(uniqueSuffix))
+                .setEmail("email" + uniqueSuffix + "@ribot.co.uk")
+                .setDateOfBirth(new Date())
+                .setHexColor("#0066FF")
+                .setAvatar("http://api.ribot.io/images/" + uniqueSuffix)
+                .setBio(randomUuid())
+                .build();
     }
 
-    public static Name makeName() {
-        Name name = new Name();
-        name.first = randomUuid();
-        name.last = randomUuid();
-        return name;
+    public static Name makeName(String uniqueSuffix) {
+        return Name.create("Name-" + uniqueSuffix, "Surname-" + uniqueSuffix);
     }
 
 }

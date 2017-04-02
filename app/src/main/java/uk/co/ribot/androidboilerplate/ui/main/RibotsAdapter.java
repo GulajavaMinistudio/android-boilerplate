@@ -10,7 +10,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import javax.inject.Inject;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import uk.co.ribot.androidboilerplate.R;
 import uk.co.ribot.androidboilerplate.data.model.Ribot;
@@ -19,6 +21,7 @@ public class RibotsAdapter extends RecyclerView.Adapter<RibotsAdapter.RibotViewH
 
     private List<Ribot> mRibots;
 
+    @Inject
     public RibotsAdapter() {
         mRibots = new ArrayList<>();
     }
@@ -35,12 +38,12 @@ public class RibotsAdapter extends RecyclerView.Adapter<RibotsAdapter.RibotViewH
     }
 
     @Override
-    public void onBindViewHolder(RibotViewHolder holder, int position) {
+    public void onBindViewHolder(final RibotViewHolder holder, int position) {
         Ribot ribot = mRibots.get(position);
-        holder.hexColorView.setBackgroundColor(Color.parseColor(ribot.profile.hexColor));
+        holder.hexColorView.setBackgroundColor(Color.parseColor(ribot.profile().hexColor()));
         holder.nameTextView.setText(String.format("%s %s",
-                ribot.profile.name.first, ribot.profile.name.last));
-        holder.emailTextView.setText(ribot.profile.email);
+                ribot.profile().name().first(), ribot.profile().name().last()));
+        holder.emailTextView.setText(ribot.profile().email());
     }
 
     @Override
@@ -50,9 +53,9 @@ public class RibotsAdapter extends RecyclerView.Adapter<RibotsAdapter.RibotViewH
 
     class RibotViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.view_hex_color) View hexColorView;
-        @Bind(R.id.text_name) TextView nameTextView;
-        @Bind(R.id.text_email) TextView emailTextView;
+        @BindView(R.id.view_hex_color) View hexColorView;
+        @BindView(R.id.text_name) TextView nameTextView;
+        @BindView(R.id.text_email) TextView emailTextView;
 
         public RibotViewHolder(View itemView) {
             super(itemView);

@@ -12,17 +12,18 @@ Libraries and tools included:
 - [SqlBrite](https://github.com/square/sqlbrite)
 - [Butterknife](https://github.com/JakeWharton/butterknife)
 - [Timber](https://github.com/JakeWharton/timber)
-- [Picasso](http://square.github.io/picasso/)
-- [Otto](http://square.github.io/otto/) event bus
-- Functional tests with [Espresso](https://code.google.com/p/android-test-kit/wiki/Espresso)
-- Unit tests with [Robolectric](http://robolectric.org/) 
+- [Glide](https://github.com/bumptech/glide)
+- [AutoValue](https://github.com/google/auto/tree/master/value) with extensions [AutoValueParcel](https://github.com/rharter/auto-value-parcel) and [AutoValueGson](https://github.com/rharter/auto-value-gson)
+- Functional tests with [Espresso](https://google.github.io/android-testing-support-library/docs/espresso/index.html)
+- [Robolectric](http://robolectric.org/)
 - [Mockito](http://mockito.org/)
 - [Checkstyle](http://checkstyle.sourceforge.net/), [PMD](https://pmd.github.io/) and [Findbugs](http://findbugs.sourceforge.net/) for code analysis
 
 ## Requirements
 
+- JDK 1.8
 - [Android SDK](http://developer.android.com/sdk/index.html).
-- Android [6.0 (API 23) ](http://developer.android.com/tools/revisions/platforms.html#6.0).
+- Android N [(API 24) ](http://developer.android.com/tools/revisions/platforms.html).
 - Latest Android SDK Tools and build tools.
 
 
@@ -139,3 +140,23 @@ To quickly start a new project from this boilerplate follow the next steps:
 * Add Fabric API key and secret to fabric.properties and uncomment Fabric plugin set up in `app/build.gradle`
 * Update `proguard-rules.pro` to keep models (see TODO in file) and add extra rules to file if needed.
 * Update README with information relevant to the new project.
+* Update LICENSE to match the requirements of the new project.
+
+## License
+
+```
+    Copyright 2015 Ribot Ltd.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+```
+
